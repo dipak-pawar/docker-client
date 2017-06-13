@@ -285,7 +285,7 @@ public class ContainerNamedOperationImpl extends BaseContainerOperation implemen
     }
 
     @Override
-    public SinceContainerOutputErrorTimestampsTailingLinesFollowDisplayInterface<OutputHandle> logs() {
+    public SinceContainerOutputErrorTimestampsTailingLinesUsingListenerFollowDisplayInterface<OutputHandle> logs() {
         return new GetLogsOfContainer(client, config, name, null, null, null, null, null, 0, false);
     }
 
