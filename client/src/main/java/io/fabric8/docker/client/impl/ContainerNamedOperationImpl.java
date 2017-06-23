@@ -163,6 +163,11 @@ public class ContainerNamedOperationImpl extends BaseContainerOperation implemen
     }
 
     @Override
+    public Boolean start(boolean detached) {
+        return null;
+    }
+
+    @Override
     public Boolean stop() {
         return stop(0);
     }

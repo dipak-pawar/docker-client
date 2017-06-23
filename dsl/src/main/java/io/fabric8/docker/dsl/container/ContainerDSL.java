@@ -28,6 +28,7 @@ import io.fabric8.docker.api.model.ExecConfig;
 import io.fabric8.docker.api.model.InlineContainerCreate;
 import io.fabric8.docker.api.model.InlineExecConfig;
 import io.fabric8.docker.api.model.Stats;
+import io.fabric8.docker.dsl.EventListener;
 import io.fabric8.docker.dsl.InputOutputErrorHandle;
 import io.fabric8.docker.dsl.OutputHandle;
 import io.fabric8.docker.dsl.annotations.CreateOption;
@@ -171,6 +172,11 @@ public interface ContainerDSL {
     Boolean start();
 
     @Terminal
+    @Only({ExecOption.class})
+    @InterfaceName("ContainerExecResource")
+    Boolean start(boolean detached);
+
+    @Terminal
     @OtherOption
     @All({NamedOption.class})
     @InterfaceName("ContainerResource")
@@ -248,27 +254,27 @@ public interface ContainerDSL {
     @InterfaceName("ContainerInputInterface")
     void redirectingInput();
 
-    @Any({LogOption.class, AttachOption.class})
+    @Any({LogOption.class, AttachOption.class, ExecOption.class})
     @InterfaceName("ContainerOutputInterface")
     void readingOutput(PipedInputStream outPipe);
 
-    @Any({LogOption.class, AttachOption.class})
+    @Any({LogOption.class, AttachOption.class, ExecOption.class})
     @InterfaceName("ContainerOutputInterface")
     void writingOutput(OutputStream out);
 
-    @Any({LogOption.class, AttachOption.class})
+    @Any({LogOption.class, AttachOption.class, ExecOption.class})
     @InterfaceName("ContainerOutputInterface")
     void redirectingOutput();
 
-    @Any({LogOption.class, AttachOption.class})
+    @Any({LogOption.class, AttachOption.class, ExecOption.class})
     @InterfaceName("ContainerErrorInterface")
     void readingError(PipedInputStream errPipe);
 
-    @Any({LogOption.class, AttachOption.class})
+    @Any({LogOption.class, AttachOption.class, ExecOption.class})
     @InterfaceName("ContainerErrorInterface")
     void writingError(OutputStream err);
 
-    @All({LogOption.class})
+    @All({LogOption.class, ExecOption.class})
     @InterfaceName("ContainerErrorInterface")
     void redirectingError();
 
@@ -277,6 +283,9 @@ public interface ContainerDSL {
 
     @All({LogOption.class})
     void tailingLines(int number);
+
+    @All({ExecOption.class})
+    void usingListener(EventListener listener);
 
     @Terminal
     @All(NamedOption.class)
