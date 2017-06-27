@@ -32,7 +32,7 @@ import io.fabric8.docker.dsl.InputOutputErrorHandle;
 import io.fabric8.docker.dsl.OutputHandle;
 import io.fabric8.docker.dsl.container.ContainerExecResourceLogsAttachArchiveInterface;
 import io.fabric8.docker.dsl.container.ContainerInputOutputErrorStreamGetLogsInterface;
-import io.fabric8.docker.dsl.container.SinceContainerOutputErrorTimestampsTailingLinesFollowDisplayInterface;
+import io.fabric8.docker.dsl.container.SinceContainerOutputErrorTimestampsTailingLinesUsingListenerFollowDisplayInterface;
 import io.fabric8.docker.dsl.container.UploadToDownloadFromHostResourceTarInputStreamInterface;
 import java.io.InputStream;
 import java.net.URL;
@@ -163,7 +163,7 @@ public class ContainerNamedOperationImpl extends BaseContainerOperation implemen
     }
 
     @Override
-    public Boolean start(boolean detached) {
+    public OutputHandle start(boolean detached) {
         return null;
     }
 
